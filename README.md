@@ -1,2 +1,2 @@
 # Ala-Wai-Sensing-Project-R4
-This Project is used for collecting data from the Ala Wai using our small device consisting of a temperature sensor and a Particle Electron. 
+This Project is used for collecting data from the Ala Wai using our small device consisting of a temperature sensor and a Particle Electron. The data is then placed into a google sheet that is keeping and recording the data to look at later. The Google Sheets also puts the data into a graph to see the change over a period of time. This project sends temperature data once a minute till the battery voltage for the electron is around 3.0v, then the Electron will go into deep sleep.  
