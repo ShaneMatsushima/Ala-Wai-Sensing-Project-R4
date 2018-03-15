@@ -11,7 +11,7 @@ These are the supplies needed to create this project:
 * Particle Electron wich can be found here: [Particle Electron](https://www.particle.io/products/hardware/electron-cellular-2g-3g-lte)
 * Temperature sensor which can be found here: [Temperature Sensor](https://www.sparkfun.com/products/11050)
 * LiPo battery (voltage around 3.3v - 4.0v) 
-* Water tiight container which can be found here: [Container] (https://www.mcmaster.com/#electrical-enclosures/=1bru0h2)
+* Water tiight container which can be found here: [Container](https://www.mcmaster.com/#electrical-enclosures/=1bru0h2)
 
 ### Prerequisites
 This IoT (Internet of Things) project is based on using Particles' IDE and the server that allows you to send data from your Partilce Electron to the webhook or the erver that will send your data. For this project we are using Particles' partnership with google to send data from the Electron to google sheets. The temperature and voltage data is sent to the google sheets. On google sheets side, the time stamp is created and the graph is produced based on what data is being collected from the Electron. 
