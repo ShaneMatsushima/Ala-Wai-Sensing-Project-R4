@@ -4,8 +4,8 @@
 
 #include <UbidotsMicroESP8266.h>
 
-#define ID1 "5ac7ef7dc03f972ba56665c8" // temp sensor
-#define TOKEN "A1E-4gfwu1P5Vt4Gi6L3m7y5ziXpoRPD52" // Put here your Ubidots TOKEN
+#define ID1 "Temperature Sensor ID" 
+#define TOKEN "Put Ubidots TOKEN here"
 
 Ubidots client1(TOKEN);
 
