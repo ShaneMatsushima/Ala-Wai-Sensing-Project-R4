@@ -10,8 +10,8 @@
 Ubidots client1(TOKEN);
 
 //WiFi credentials
-#define WIFISSID "Iolani"
-#define PASSWORD "2016IOWelcome"
+#define WIFISSID "Insert WiFi SSID"
+#define PASSWORD "Insert WiFi Password"
 
 #define NAME "Hello World!"
 
