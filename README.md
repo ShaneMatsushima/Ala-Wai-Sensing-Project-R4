@@ -108,11 +108,16 @@ Once the variables have been changed to it's respected ID's, the following will 
 * Plug in the NodeMCU via Micro USB to USB into a Comm Port
 * Select the Comm Port the device is in and click the upload button on the top right of the IDE
 
-### Google Sheets Code
-
 ### Wiring
+Follow the schematics for the wiring of both the transmitting and receiving portions of the system. 
 
 ### Contacts
+-----------------------------------------------------------------------------------------------------------------------------
+Developer: Shane Matsushima
+School: Iolani School
+Email: skm1901@iolani.org
 
-
-
+Developer: Matthew Leong-Hoggenberg
+School: Iolani School
+Email: mah2001@iolani.org
+-----------------------------------------------------------------------------------------------------------------------------
