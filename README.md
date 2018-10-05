@@ -112,10 +112,10 @@ Once the variables have been changed to it's respected ID's, the following will 
 Follow the schematics for the wiring of both the transmitting and receiving portions of the system. 
 
 ### Contacts
-Developer: Shane Matsushima
-School: Iolani School
-Email: skm1901@iolani.org
+Developer Shane Matsushima
+School Iolani School
+Email skm1901@iolani.org
 
-Developer: Matthew Leong-Hoggenberg
-School: Iolani School
-Email: mah2001@iolani.org
+Developer Matthew Leong-Hoggenberg
+School Iolani School
+Email mah2001@iolani.org
