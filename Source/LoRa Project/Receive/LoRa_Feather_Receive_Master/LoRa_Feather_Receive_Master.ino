@@ -1,4 +1,5 @@
 
+
 // Arduino9x_RX
 // -*- mode: C++ -*-
 // Example sketch showing how to create a simple messaging client (receiver)
@@ -6,10 +7,11 @@
 // reliability, so you should only use RH_RF95 if you do not need the higher
 // level messaging abilities.
 // It is designed to work with the other example Arduino9x_TX
-
 #include <SPI.h>
 #include <RH_RF95.h>
+#include <SoftwareSerial.h>
 
+SoftwareSerial mySerial(10,11);
  
 #define RFM95_CS 8
 #define RFM95_RST 4
@@ -26,13 +28,13 @@ RH_RF95 rf95(RFM95_CS, RFM95_INT);
 
 void setup() 
 {
-  
   pinMode(LED, OUTPUT);     
   pinMode(RFM95_RST, OUTPUT);
   digitalWrite(RFM95_RST, HIGH);
   
   while (!Serial);
   Serial.begin(9600);
+  mySerial.begin(9600);
   delay(100);
  
 
@@ -66,6 +68,7 @@ void setup()
  
 void loop()
 {
+  Serial.write("text");
   if (rf95.available())
   {
     // Should be a message for us now   
@@ -75,10 +78,10 @@ void loop()
     if (rf95.recv(buf, &len))
     {
       digitalWrite(LED, HIGH);
-      RH_RF95::printBuffer("Received: ", buf, len);
+     // RH_RF95::printBuffer("Received: ", buf, len);
       String tempval = (char*)buf;
-      //int tempS = tempval.toInt();
-      Serial.println(tempval);
+     Serial.println(tempval);
+     mySerial.println (tempval);
       
       // Send a reply
       uint8_t data[] = "And hello back to you";
