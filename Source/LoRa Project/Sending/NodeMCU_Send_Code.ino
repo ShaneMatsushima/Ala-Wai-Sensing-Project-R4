@@ -17,12 +17,11 @@ Ubidots client1(TOKEN);
 
 
 String sendvalue;
-char tempval[6];
-
+char tempval[7];
 void setup() {
   // put your setup code here, to run once:
 Serial.begin(9600);
-while(!Serial){;}
+//while(!Serial){;}
 client1.wifiConnection(WIFISSID, PASSWORD);
 
 }
@@ -32,11 +31,15 @@ void loop() {
   //Serial.println("*");
   if (Serial.available()){
      Serial.readBytes(tempval, 6);
-Serial.println(tempval);
+Serial.println( tempval);
+String tempSend(tempval);
+float tempValSend = tempSend.toFloat();
+Serial.println( tempValSend);
      
     //Serial.write(tempval);
-  
-  client1.add(ID1, tempval);
+  if(tempValSend > 10.00){
+  client1.add(ID1, tempValSend);
   client1.sendAll();
-  } 
+    } 
+  }
 }
