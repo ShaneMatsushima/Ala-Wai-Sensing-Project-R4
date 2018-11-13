@@ -12,6 +12,8 @@
 
 #define ONE_WIRE_BUS 12
 
+#define LED 13
+
 double temp;
  
 // Singleton instance of the radio driver
@@ -23,10 +25,11 @@ DallasTemperature sensor(&oneWire);
  
 void setup() 
 {
+    pinMode(LED, OUTPUT);   
   pinMode(RFM95_RST, OUTPUT);
   digitalWrite(RFM95_RST, HIGH);
  
-  while (!Serial); // remove if not tethered to computer (looks for serial monitor to open)
+ // while (!Serial); // remove if not tethered to computer (looks for serial monitor to open)
   Serial.begin(9600);
   delay(100);
  
@@ -84,8 +87,11 @@ void loop()
  Serial.println(radiopacket);
  radiopacket[5] = 0;
   Serial.println("Sending..."); delay(10);
-  rf95.send(radiopacket, 6);
- 
+  //rf95.send(radiopacket, 6);
+  if(rf95.send(radiopacket, 6)){
+    digitalWrite(LED, HIGH);
+  }
+  digitalWrite(LED, LOW);
   Serial.println("Waiting for packet to complete..."); delay(10);
   rf95.waitPacketSent();
   // Now wait for a reply
