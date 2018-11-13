@@ -1,5 +1,3 @@
-
-
 // Arduino9x_RX
 // -*- mode: C++ -*-
 // Example sketch showing how to create a simple messaging client (receiver)
@@ -32,7 +30,7 @@ void setup()
   pinMode(RFM95_RST, OUTPUT);
   digitalWrite(RFM95_RST, HIGH);
   
-  while (!Serial);
+  //while (!Serial);
   Serial.begin(9600);
   mySerial.begin(9600);
   delay(100);
@@ -68,7 +66,7 @@ void setup()
  
 void loop()
 {
-  Serial.write("text");
+  //Serial.write("text");
   if (rf95.available())
   {
     // Should be a message for us now   
