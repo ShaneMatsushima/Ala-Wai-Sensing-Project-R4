@@ -4,7 +4,7 @@
 
 #include <UbidotsMicroESP8266.h>
 
-#define ID1 "5bbd15c3c03f9769f430c81c" 
+#define ID1 "5bbd15b7c03f976a1517aae5" 
 #define TOKEN "A1E-aQn8guUxXXoVL62ckFOw8y8yZkvtrk"
 
 Ubidots client1(TOKEN);
@@ -38,7 +38,7 @@ float tempValSend = tempSend.toFloat();
 Serial.println( tempValSend);
 digitalWrite(LED, LOW);
   
-  if(tempValSend > 10.00){
+  if(tempValSend > 10.00 && tempValSend < 40){
   client1.add(ID1, tempValSend);
   client1.sendAll();
     } 

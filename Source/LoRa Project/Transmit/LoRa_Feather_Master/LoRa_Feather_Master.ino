@@ -78,14 +78,15 @@ void loop()
   char tempNumChar[6];
   tempNumStr.toCharArray(tempNumChar, 6);
   Serial.println(tempNumChar);
-  char radiopacket[6] = "      ";
-  radiopacket[0] = tempNumChar[0];
-  radiopacket[1] = tempNumChar[1];
-  radiopacket[2] = tempNumChar[2];
-  radiopacket[3] = tempNumChar[3];
-  radiopacket[4] = tempNumChar[4];
+  char radiopacket[7] = "       ";
+  radiopacket[0] = 'F'; //"N" 
+  radiopacket[1] = tempNumChar[0];
+  radiopacket[2] = tempNumChar[1];
+  radiopacket[3] = tempNumChar[2];
+  radiopacket[4] = tempNumChar[3];
+  radiopacket[5] = tempNumChar[4];
  Serial.println(radiopacket);
- radiopacket[5] = 0;
+ radiopacket[6] = 0;
   Serial.println("Sending..."); delay(10);
   //rf95.send(radiopacket, 6);
   if(rf95.send(radiopacket, 6)){

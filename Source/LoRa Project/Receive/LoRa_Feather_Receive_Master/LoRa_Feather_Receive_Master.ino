@@ -80,9 +80,10 @@ void loop()
       digitalWrite(LED, HIGH);
      // RH_RF95::printBuffer("Received: ", buf, len);
       String tempval = (char*)buf;
-     Serial.println(tempval);
+     if(tempval[0] == 'F'){ //N
+      Serial.println(tempval);
      mySerial.println (tempval);
-      
+     }
       // Send a reply
       uint8_t data[] = "And hello back to you";
       rf95.send(data, sizeof(data));
