@@ -1,16 +1,20 @@
-// Arduino9x_RX
-// -*- mode: C++ -*-
-// Example sketch showing how to create a simple messaging client (receiver)
-// with the RH_RF95 class. RH_RF95 class does not provide for addressing or
-// reliability, so you should only use RH_RF95 if you do not need the higher
-// level messaging abilities.
-// It is designed to work with the other example Arduino9x_TX
+/**
+ * Created By: Shane Matsushima
+ * Date: 12/12/18
+ * Purpose: The purpose for this code is to receive the transmitting data from the other RFM and relay it into a NodeMCU
+ *          which will send the data over to Ubidots. This code utilises the LoRa RFM transciever and an Arduino Uno to 
+ *          push and get data from one system to aother. This is the middle man for the transmition of data. 
+ */
+
+//Libraries declared for use
 #include <SPI.h>
 #include <RH_RF95.h>
 #include <SoftwareSerial.h>
 
+//Declares that pins 10 & 11 are now RX & TX on the Feather
 SoftwareSerial mySerial(10,11); //rx, tx
- 
+
+//Defining pins that the LoRa breakout baord uses
 #define RFM95_CS 8
 #define RFM95_RST 4
 #define RFM95_INT 7
@@ -23,16 +27,17 @@ SoftwareSerial mySerial(10,11); //rx, tx
 // Singleton instance of the radio driver
 RH_RF95 rf95(RFM95_CS, RFM95_INT);
  
-// Blinky on receipt
+// Blink on receipt
 #define LED 13
 
 void setup() 
 {
+  //connects LED pin to an output (LED is an output)
   pinMode(LED, OUTPUT);     
   pinMode(RFM95_RST, OUTPUT);
+  
   digitalWrite(RFM95_RST, HIGH);
   
-  //while (!Serial);
   Serial.begin(9600);
   mySerial.begin(9600);
   delay(100);
@@ -68,22 +73,29 @@ void setup()
  
 void loop()
 {
-  //Serial.write("text");
+  //checks to see if a packet was sent over from the transmitting side
   if (rf95.available())
-  {
-    // Should be a message for us now   
+  {  
     uint8_t buf[RH_RF95_MAX_MESSAGE_LEN];
     uint8_t len = sizeof(buf);
-    
+
+    //if the packet was sent with the correct buf and len
     if (rf95.recv(buf, &len))
     {
+      //turns LED on to indicate packet was received
       digitalWrite(LED, HIGH);
-     // RH_RF95::printBuffer("Received: ", buf, len);
+
+      //converts the data received into a string 
       String tempval = (char*)buf;
-     if(tempval[0] == 'F'){ //N
+
+      //checks to see if the indicated stream was collected based on the beginning character
+     if(tempval[0] == 'F'){ //change this character based on the stream character on the transmitting side
       Serial.println(tempval);
+
+     //send the string data over RX and TX to the NodeMCU
      mySerial.println (tempval);
      }
+     
       // Send a reply
       uint8_t data[] = "And hello back to you";
       rf95.send(data, sizeof(data));
