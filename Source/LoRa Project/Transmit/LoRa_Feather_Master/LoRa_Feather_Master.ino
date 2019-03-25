@@ -101,15 +101,15 @@ void loop()
   Serial.println(tempNumChar);
 
   //Places the character array from the tempnumChar into the radiopacket array
-  char radiopacket[7] = "       ";
-  radiopacket[0] = 'X'; //"N" 
-  radiopacket[1] = tempNumChar[0];
-  radiopacket[2] = tempNumChar[1];
-  radiopacket[3] = tempNumChar[2];
-  radiopacket[4] = tempNumChar[3];
-  radiopacket[5] = tempNumChar[4];
- Serial.println(radiopacket);
- radiopacket[6] = 0;
+  char radiopacket[6] = "      ";
+  //radiopacket[0] = 'X'; //"N" 
+  radiopacket[0] = tempNumChar[0];
+  radiopacket[1] = tempNumChar[1];
+  radiopacket[2] = tempNumChar[2];
+  radiopacket[3] = tempNumChar[3];
+  radiopacket[4] = tempNumChar[4];
+  radiopacket[5] = 0;
+  Serial.println(radiopacket);
  
   Serial.println("Sending..."); delay(10);
 

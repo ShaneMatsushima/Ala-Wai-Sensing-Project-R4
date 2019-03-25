@@ -11,15 +11,15 @@
 #include <UbidotsMicroESP8266.h>
 
 //ID of the variable in Ubidots to send to 
-#define ID1 "5bbd15b7c03f976a1517aae5" 
+#define ID1 "5c3e7b7ec03f975536446711" 
 
 //Token of the Ubidots account the data is being sent to 
-#define TOKEN "A1E-aQn8guUxXXoVL62ckFOw8y8yZkvtrk"
+#define TOKEN "A1E-OIKQ1rDhI0vq6NgdbDu1B3YOmWDrZN"
 
 Ubidots client1(TOKEN);
 
 //WiFi credentials
-#define WIFISSID "palila" //change to WIFI name
+#define WIFISSID "Palila" //change to WIFI name
 #define PASSWORD "io71redbird51" //change to WIFI password
 
 //Name of the device in Ubidots
@@ -34,14 +34,14 @@ char tempval[7];
 
 void setup() 
 {
-// put your setup code here, to run once:
-Serial.begin(9600);
+  // put your setup code here, to run once:
+  Serial.begin(9600);
 
-//Connects to WiFi using credentials
-client1.wifiConnection(WIFISSID, PASSWORD);
+  //Connects to WiFi using credentials
+  client1.wifiConnection(WIFISSID, PASSWORD);
 
-//LED is an output pin since it's turning on and off
-pinMode(LED, OUTPUT);
+  //LED is an output pin since it's turning on and off
+  pinMode(LED, OUTPUT);
 }
 
 void loop() {
@@ -53,7 +53,7 @@ void loop() {
     digitalWrite(LED, HIGH);
 
     //Converts what was received into an array of characters
-    Serial.readBytes(tempval, 6);
+    Serial.readBytes(tempval, 7);
     Serial.println( tempval);
 
     //converts the array of characters into a string and then into a float 
@@ -65,11 +65,11 @@ void loop() {
     digitalWrite(LED, LOW);
 
     //Checks t omake sure temperature data is in peramiters since the feather is not using the correct RX and TX (random data can be sent due to timing)
-    if(tempValSend > 10.00 && tempValSend < 40)
-    {
+    //if(tempValSend > 10.00 && tempValSend < 30)
+    //{
       //adds the temperature data into the specific Device ID and send to Ubidots
       client1.add(ID1, tempValSend);
       client1.sendAll();
-    } 
+    //} 
   }
 }

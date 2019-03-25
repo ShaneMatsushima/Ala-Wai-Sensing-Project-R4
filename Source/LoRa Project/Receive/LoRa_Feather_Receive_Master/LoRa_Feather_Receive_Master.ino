@@ -12,12 +12,12 @@
 #include <SoftwareSerial.h>
 
 //Declares that pins 10 & 11 are now RX & TX on the Feather
-SoftwareSerial mySerial(10,11); //rx, tx
+SoftwareSerial mySerial(0,1); //rx, tx
 
 //Defining pins that the LoRa breakout baord uses
-#define RFM95_CS 8
-#define RFM95_RST 4
-#define RFM95_INT 7
+#define RFM95_CS 4
+#define RFM95_RST 2
+#define RFM95_INT 3
 
 
  
@@ -89,12 +89,12 @@ void loop()
       String tempval = (char*)buf;
 
       //checks to see if the indicated stream was collected based on the beginning character
-     if(tempval[0] == 'F'){ //change this character based on the stream character on the transmitting side
+     //if(tempval[0] == 'X'){ //change this character based on the stream character on the transmitting side
       Serial.println(tempval);
 
      //send the string data over RX and TX to the NodeMCU
      mySerial.println (tempval);
-     }
+     
      
       // Send a reply
       uint8_t data[] = "And hello back to you";
