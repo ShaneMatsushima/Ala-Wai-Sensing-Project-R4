@@ -87,7 +87,7 @@ void loop()
 {
   Serial.println("Sending to rf95_server");
 
-  //grabs temperature daata from sensor
+  //grabs temperature data from sensor
   temp = getTemp();
   Serial.println(temp);
 
@@ -100,15 +100,15 @@ void loop()
   tempNumStr.toCharArray(tempNumChar, 6);
   Serial.println(tempNumChar);
 
-  //Places the character array from the tempnumChar into the radiopacket array
-  char radiopacket[6] = "      ";
-  //radiopacket[0] = 'X'; //"N" 
-  radiopacket[0] = tempNumChar[0];
-  radiopacket[1] = tempNumChar[1];
-  radiopacket[2] = tempNumChar[2];
-  radiopacket[3] = tempNumChar[3];
-  radiopacket[4] = tempNumChar[4];
-  radiopacket[5] = 0;
+  //Places the character array from the tempnumChar into the radiopacket array with a Device ID
+  char radiopacket[7];
+  char deviceID = 'A';
+  radiopacket[0] = deviceID;
+  for(int i = 1; i <= 5; i++)
+  {
+    radiopacket[i] = tempNumChar[i];
+  }
+  radiopacket[6] = 0;
   Serial.println(radiopacket);
  
   Serial.println("Sending..."); delay(10);
