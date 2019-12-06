@@ -64,12 +64,8 @@ void loop() {
     //Tunrs off LED once process is done
     digitalWrite(LED, LOW);
 
-    //Checks t omake sure temperature data is in peramiters since the feather is not using the correct RX and TX (random data can be sent due to timing)
-    //if(tempValSend > 10.00 && tempValSend < 30)
-    //{
       //adds the temperature data into the specific Device ID and send to Ubidots
       client1.add(ID1, tempValSend);
       client1.sendAll();
-    //} 
   }
 }
