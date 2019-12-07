@@ -92,7 +92,6 @@ void loop() {
 
 /**
  * Function takes the raw data from the RF and retreives only the data value without the device ID
- * 
  */
 float getData(String raw)
 {

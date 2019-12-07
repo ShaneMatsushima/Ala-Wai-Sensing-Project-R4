@@ -150,7 +150,9 @@ void loop()
   delay(1000);
 }
 
-//function to grab the temperature data as a float 
+/**
+ *  function to grab the temperature data as a float 
+ **/
 float getTemp()
 {
   sensor.requestTemperatures();

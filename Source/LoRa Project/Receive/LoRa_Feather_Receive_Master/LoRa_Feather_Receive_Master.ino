@@ -95,15 +95,9 @@ void loop()
      //send the string data over RX and TX to the NodeMCU
      mySerial.println (tempval);
      
-     
-      // Send a reply
-      uint8_t data[] = "And hello back to you";
-      rf95.send(data, sizeof(data));
-      rf95.waitPacketSent();
-      digitalWrite(LED, LOW);
     }
-    else
-    {
-    }
-  }
-}
+
+  } // rf available
+
+
+} // void loop
