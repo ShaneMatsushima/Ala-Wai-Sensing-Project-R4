@@ -18,6 +18,10 @@
 #define ID1 "Place Variable ID Here" 
 #define ID2 "Place Variable ID Here" 
 
+//Device ID for incoming data
+#define DD1 A
+#define DD2 B
+
 //Token of the Ubidots account the data is being sent to 
 #define TOKEN "Place Token Here"
 
@@ -64,22 +68,16 @@ void loop() {
 
     //converts the array of characters into a string and then into a float
     // The data is sorted to a specific ID based on the device indicator at the front  of the data
-    if(tempval[0] == 'A')
+    if(tempval[0] == DD1)
     {
-        String tempRaw(tempval);
-        string tempSend = tempRaw.substring(1,6);
-        float tempValSend = tempSend.toFloat();
-        Serial.println(tempvalSend);
-        client1.add(ID1, tempvalSend);
+        Serial.println(getData(tempVal));
+        client1.add(ID1, getData(tempVal));
         client1.sendAll();
     }
-    if(tempval[0] == 'B')
+    if(tempval[0] == DD2)
     {
-        String tempSend(tempval);
-        string tempSend = tempRaw.substring(1,6);
-        float tempValSend = tempSend.toFloat();
-        Serial.println(tempvalSend);
-        client1.add(ID2, tempvalSend);
+        Serial.println(getData(tempVal));
+        client1.add(ID2, getData(tempVal));
         client1.sendAll();
     }
     else
@@ -87,6 +85,20 @@ void loop() {
         Serial.println("Error: Device Uknown");
     }
 
-  }
+  } // Serial available
+
+} // void loop 
+
+
+/**
+ * Function takes the raw data from the RF and retreives only the data value without the device ID
+ * 
+ */
+float getData(String raw)
+{
+  String tempRaw(raw);
+  string tempSend = tempRaw.substring(1,6);
+  float tempValSend = tempSend.toFloat();
+  return tempValSend;
 }
 
