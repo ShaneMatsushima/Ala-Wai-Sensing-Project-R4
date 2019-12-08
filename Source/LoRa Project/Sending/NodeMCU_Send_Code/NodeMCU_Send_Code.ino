@@ -26,7 +26,8 @@ Ubidots client1(TOKEN);
 #define NAME "Iolani MonKit 1"
 
 //Declaring LED to be pin 13
-#define LED 13
+#define LED 13          `                                                                                                                                     
+
 
 //Variable declaration
 String sendvalue;
