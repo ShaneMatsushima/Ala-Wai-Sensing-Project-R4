@@ -12,12 +12,12 @@
 #include <SoftwareSerial.h>
 
 //Declares that pins 10 & 11 are now RX & TX on the Feather
-SoftwareSerial mySerial(0,1); //rx, tx
+SoftwareSerial mySerial(10,11); //rx, tx
 
 //Defining pins that the LoRa breakout baord uses
-#define RFM95_CS 4
-#define RFM95_RST 2
-#define RFM95_INT 3
+#define RFM95_CS 8
+#define RFM95_RST 4
+#define RFM95_INT 7
 
 
  
@@ -40,7 +40,7 @@ void setup()
   
   Serial.begin(9600);
   mySerial.begin(9600);
-  delay(100);
+  delay(5000);
  
 
   
@@ -51,16 +51,18 @@ void setup()
   delay(10);
  
   while (!rf95.init()) {
-    
+    Serial.println("init failed");
     while (1);
   }
 
  
   // Defaults after init are 434.0MHz, modulation GFSK_Rb250Fd250, +13dbM
   if (!rf95.setFrequency(RF95_FREQ)) {
-    
+    Serial.println("setFreq failed");
     while (1);
   }
+
+  Serial.println("Ok");
 
  
   // Defaults after init are 434.0MHz, 13dBm, Bw = 125 kHz, Cr = 4/5, Sf = 128chips/symbol, CRC on
@@ -71,8 +73,7 @@ void setup()
   rf95.setTxPower(23, false);
 }
  
-void loop()
-{
+void loop() {
   //checks to see if a packet was sent over from the transmitting side
   if (rf95.available())
   {  
@@ -82,22 +83,37 @@ void loop()
     //if the packet was sent with the correct buf and len
     if (rf95.recv(buf, &len))
     {
+    uint8_t num[6];
+
+    for (int i = 0; i < 6; i++) {
+      num[i] = buf[i+1];
+    }
+
+    char sensorNum = buf[0];
+   
       //turns LED on to indicate packet was received
       digitalWrite(LED, HIGH);
 
       //converts the data received into a string 
-      String tempval = (char*)buf;
+      String val1 = (char*)num;
 
       //checks to see if the indicated stream was collected based on the beginning character
      //if(tempval[0] == 'X'){ //change this character based on the stream character on the transmitting side
-      Serial.println(tempval);
+      Serial.println(val1);
+      Serial.println(sensorNum);
 
      //send the string data over RX and TX to the NodeMCU
-     mySerial.println (tempval);
+     mySerial.print(val1 + sensorNum);
      
+     
+      // Send a reply
+      uint8_t data[] = "bruh";
+      rf95.send(data, sizeof(data));
+      rf95.waitPacketSent();
+      digitalWrite(LED, LOW);
     }
-
-  } // rf available
-
-
-} // void loop
+    else
+    {
+    }
+  }
+}
